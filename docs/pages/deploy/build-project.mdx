@@ -1,4 +1,50 @@
----
+---import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Linking } from "react-native";
+
+export default function App() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [item, setItem] = useState("");
+  const [location, setLocation] = useState("");
+
+  const whatsappNumber = "2349037205015";
+
+  const sendOrder = () => {
+    const message =
+      `Barde Delivery 24 Order:%0A` +
+      `Name: ${name}%0A` +
+      `Phone: ${phone}%0A` +
+      `Item: ${item}%0A` +
+      `Location: ${location}`;
+
+    const url = `https://wa.me/${whatsappNumber}?text=${message}`;
+    Linking.openURL(url);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Barde Delivery 24</Text>
+
+      <TextInput style={styles.input} placeholder="Name" onChangeText={setName} />
+      <TextInput style={styles.input} placeholder="Phone" onChangeText={setPhone} />
+      <TextInput style={styles.input} placeholder="Item" onChangeText={setItem} />
+      <TextInput style={styles.input} placeholder="Location" onChangeText={setLocation} />
+
+      <TouchableOpacity style={styles.button} onPress={sendOrder}>
+        <Text style={{ color: "white", fontWeight: "bold" }}>
+          Send Order on WhatsApp
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 20, justifyContent: "center", backgroundColor: "#eaffea" },
+  title: { fontSize: 24, fontWeight: "bold", textAlign: "center", marginBottom: 20, color: "green" },
+  input: { borderWidth: 1, borderColor: "#ccc", padding: 10, marginBottom: 10, borderRadius: 10 },
+  button: { backgroundColor: "green", padding: 15, borderRadius: 10, alignItems: "center" }
+});
 title: Build your project for app stores
 description: Learn how to create a production build for your app that is ready to be submitted to app stores from the command line using EAS Build.
 sidebar_title: Build project for app stores
